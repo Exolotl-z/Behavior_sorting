@@ -323,14 +323,14 @@ class BehaviorAnnotator:
         Use start + N minutes as end, lock window, and jump to start.
         """
         if self.duration_min_var is None:
-            duration_min = 5.0
+            duration_min = 10.0
         else:
             try:
                 duration_min = float(self.duration_min_var.get().strip() or "5")
             except ValueError:
-                duration_min = 5.0
+                duration_min = 10.0
         if duration_min <= 0:
-            duration_min = 5.0
+            duration_min = 10.0
 
         proposed_end = self.scoring_start + duration_min * 60.0
         self.scoring_end = min(self.duration, proposed_end)
@@ -777,7 +777,7 @@ class BehaviorAnnotator:
         duration_frame = ttk.Frame(window_frame)
         duration_frame.pack(fill='x', pady=5)
         ttk.Label(duration_frame, text="Duration (min):").pack(side='left')
-        self.duration_min_var = tk.StringVar(value="5")
+        self.duration_min_var = tk.StringVar(value="10")
         ttk.Entry(duration_frame, textvariable=self.duration_min_var, width=8).pack(side='left', padx=5)
 
         ttk.Button(window_frame, text="Start Annotation (Lock)",
